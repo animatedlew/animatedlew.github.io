@@ -6,8 +6,6 @@ var s = {
 };
 
 function setupCanvas(w, h) {
-
-    console.log(w, h);
     var canvas = document.getElementById("line2mouse");
     canvas.setAttribute("width", w);
     canvas.setAttribute("height", h);
@@ -53,7 +51,6 @@ function circle(ctx, x, y, r) {
 }
 
 function draw(ctx) {
-
     clear(ctx);
     line(ctx, s.w / 2, s.h / 2, s.mx, s.my);
     circle(ctx, s.w / 2, s.h / 2, 4);
