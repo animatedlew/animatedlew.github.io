@@ -1,0 +1,6 @@
+{
+  "esnext": true,
+  "globals": {
+    "d3": true
+  }
+}
