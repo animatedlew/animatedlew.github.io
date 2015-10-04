@@ -1,3 +1,4 @@
+
 var s = {
     w: 530,
     h: 250,
@@ -6,13 +7,14 @@ var s = {
 };
 
 function setupCanvas(w, h) {
-    var canvas = document.getElementById("line2mouse");
+    var canvas = document.getElementById("limitLine");
     canvas.setAttribute("width", w);
     canvas.setAttribute("height", h);
     return canvas.getContext("2d");
 }
 
 function hud(ctx, x, y) {
+
     ctx.fillStyle = "rgb(100, 100, 100)";
     ctx.fillRect(0, s.h - (8 * 3), s.w, s.h);
 
@@ -22,6 +24,7 @@ function hud(ctx, x, y) {
 }
 
 function line(ctx, x1, y1, x2, y2) {
+
     ctx.save();
     ctx.strokeStyle = "steelblue";
     ctx.beginPath();
@@ -32,12 +35,14 @@ function line(ctx, x1, y1, x2, y2) {
 }
 
 function clear(ctx) {
+
     // low opacity for ghosting effect
-    ctx.fillStyle = "rgb(200, 200, 200)";
+    ctx.fillStyle = "rgb(250, 250, 250)";
     ctx.fillRect(0, 0, s.w, s.h);
 }
 
 function circle(ctx, x, y, r) {
+
     ctx.beginPath();
     ctx.arc(x, y, r, 0, 2 * Math.PI);
     ctx.fillStyle = "white";
@@ -48,10 +53,25 @@ function circle(ctx, x, y, r) {
 
 function draw(ctx) {
     clear(ctx);
-    line(ctx, s.w / 2, s.h / 2, s.mx, s.my);
-    circle(ctx, s.w / 2, s.h / 2, 4);
-    circle(ctx, s.mx, s.my, 4);
-    hud(ctx, s.mx, s.my);
+
+    let segLength = 50;
+
+    const o = new Vector(s.w, s.h).scale(0.5);
+    const m = new Vector(s.mx, s.my);
+    const c = o.clone().sub(m);
+
+    if (c.mag < segLength * 2) c.scale(0.5);
+    else c.setMag(segLength);
+
+    c.add(m);
+
+    line(ctx, m.x, m.y, c.x, c.y);
+
+    circle(ctx, o.x, o.y, 4);
+    circle(ctx, m.x, m.y, 4);
+    circle(ctx, c.x, c.y, 2);
+
+    hud(ctx, m.x, m.y);
 }
 
 var init = function() {
