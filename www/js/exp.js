@@ -3,7 +3,7 @@ var margin = { top: 40, right: 40, bottom: 50, left: 60 },
     height = 250 - margin.top - margin.bottom;
 
 var x = d3.scale.linear()
-    .domain([0, 3])
+    .domain([-3, 3])
     .range([0, width]);
 
 var y = d3.scale.linear()
@@ -39,31 +39,27 @@ svg.append("g")
     .call(xAxis);
 
 svg.append("path")
-    .datum(d3.range(0, 4).map(d => [d, 0]))
+    .datum(d3.range(-3, 4).map(d => [d, 0]))
     .attr("class", "gray line")
     .attr("d", line);
 
 svg.append("path")
-    .datum(d3.range(0, 2.4, 0.1).map(d => [d, Math.exp(d)]))
+    .datum(d3.range(-10, 11).map(d => [0, d]))
+    .attr("class", "gray line")
+    .attr("d", line);
+
+
+svg.append("path")
+    .datum(d3.range(-3, 2.4, 0.1).map(d => [d, Math.exp(d)]))
     .attr("class", "blue line")
     .attr("d", line);
 
 svg.append("path")
-    .datum(d3.range(0, 1.2, 0.1).map(d => [d, Math.exp(2*d)]))
-    .attr("class", "dark blue line")
-    .attr("d", line);
-
-svg.append("path")
-    .datum(d3.range(0, 3, 0.1).map(d => [d, Math.exp(-d)]))
+    .datum(d3.range(-2, 3, 0.1).map(d => [d, Math.exp(-d)]))
     .attr("class", "red line")
     .attr("d", line);
 
 svg.append("path")
-    .datum(d3.range(0, 3, 0.1).map(d => [d, Math.exp(-2*d)]))
-    .attr("class", "dark red line")
-    .attr("d", line);
-
-svg.append("path")
-    .datum(d3.range(0, 2.4, 0.1).map(d => [d, -Math.exp(d)]))
+    .datum(d3.range(-3, 2.4, 0.1).map(d => [d, -Math.exp(d)]))
     .attr("class", "green line")
     .attr("d", line);
