@@ -48,7 +48,6 @@ svg.append("path")
     .attr("class", "gray line")
     .attr("d", line);
 
-
 svg.append("path")
     .datum(d3.range(-3, 2.4, 0.1).map(d => [d, Math.exp(d)]))
     .attr("class", "blue line")
