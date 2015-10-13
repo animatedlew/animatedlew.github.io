@@ -1,11 +1,9 @@
 
 class Line {
-
     constructor(ctx, weakeningDistance) {
         this.weakeningDistance = weakeningDistance;
         this.ctx = ctx;
     }
-
     draw(x1, y1, x2, y2, c) {
         this.ctx.save();
         this.ctx.strokeStyle = c || "steelblue";
@@ -16,7 +14,6 @@ class Line {
         this.ctx.stroke();
         this.ctx.restore();
     }
-
     render(x1, y1, x2, y2) {
         const a = new Vector(x1, y1);
         const b = new Vector(x2, y2);

@@ -1,4 +1,10 @@
 
+let rand = (s, e) => Math.random() * e + s;
+let choose2 = n => n * (n + 1) / 2;
+let assert = (condition, message) => {
+    if (!condition) { throw message || "Assertion failed"; }
+};
+
 ///////////////////////////////////////////////////////////////////////////////
 var init = () => {
 
@@ -7,21 +13,33 @@ var init = () => {
 
     requestAnimationFrame(step);
 
-    let x = Math.random() * 500 + 30,
-        y = Math.random() * 180 + 20;
+    const MAX_PARTICLES = 20;
+    const MAX_CONNECTIONS = choose2(MAX_PARTICLES - 1);
 
-    let circleA = new Circle(canvas.ctx, x, y, 10),
-        circleB = new Circle(canvas.ctx, x/2, y/2, 10),
-        lineA = new Line(canvas.ctx, 200);
+    let particles = new Array(MAX_PARTICLES)
+        .join("!")
+        .split("!")
+        .map(p => new Circle(
+            canvas.ctx,
+            rand(30, 500),
+            rand(20, 180),
+            4, "#ddd"
+        ));
+
+    let connection = new Line(canvas.ctx, 300);
 
     let draw = () => {
         canvas.clear();
-        lineA.render(
-            circleA.position.x, circleA.position.y,
-            circleB.position.x, circleB.position.y
-        );
-        circleA.render();
-        circleB.render();
+        particles.forEach((p0, i) => {
+            while (++i < MAX_PARTICLES) {
+                var p1 = particles[i]; // grab the tail
+                connection.render(
+                    p0.position.x, p0.position.y,
+                    p1.position.x, p1.position.y
+                );
+            }
+        });
+        particles.forEach(p => p.render());
     };
 };
 

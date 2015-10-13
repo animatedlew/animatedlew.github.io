@@ -1,29 +1,26 @@
 class Draggable {
-    constructor(ctx, x, y, r) {
+    constructor(ctx, x, y, r, isDraggable) {
         this.ctx = ctx;
         this.r = r;
         this.position = new Vector(x, y);
-        this.setupMouseEvents(ctx.canvas);
+        if (isDraggable) this.setupMouseEvents(ctx.canvas);
     }
     setupMouseEvents(canvas) {
         this.isDragging = false;
-        canvas.onmousemove = e => {
-            if (this.isDragging) {
-                this.position.x = e.offsetX;
-                this.position.y = e.offsetY;
-            }
-        };
-        canvas.onmousedown = e => {
-            var dist = Vector.distance(this.position, new Vector(e.offsetX, e.offsetY));
-            if (dist < this.r) {
-                this.isDragging = e.button === 0;
+        canvas.addEventListener("mouse.down", e => {
+            var dist = Vector.distance(this.position, e.detail.mouse);
+            if (dist <= this.r) {
+                this.isDragging = e.detail.button === 0;
                 this.ctx.canvas.classList.add("dragging");
             }
-        };
-        canvas.onmouseup = e => {
+        }, false);
+        canvas.addEventListener("mouse.move", e => {
+            if (this.isDragging) this.position = e.detail.mouse;
+        }, false);
+        canvas.addEventListener("mouse.up", e => {
             this.isDragging = false;
             this.ctx.canvas.classList.remove("dragging");
-        };
+        }, false);
     }
 }
 

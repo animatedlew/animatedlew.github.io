@@ -3,6 +3,30 @@ class Canvas {
         this.selector = selector;
         this.w = w; this.h = h;
         this.ctx = this.getCanvas().getContext("2d");
+        this.mouse = new Vector(this.w/2, this.h/2);
+        this.setupEvents(this.ctx.canvas);
+    }
+    setupEvents(canvas) {
+        canvas.onmousedown = e => {
+            this.mouse.x = e.offsetX; this.mouse.y = e.offsetY;
+            this.ctx.canvas.classList.add("dragging");
+            canvas.dispatchEvent(new CustomEvent("mouse.down", {
+                detail: { button: e.button, mouse: this.mouse.clone() }
+            }));
+        };
+        canvas.onmousemove = e => {
+            this.mouse.x = e.offsetX; this.mouse.y = e.offsetY;
+            canvas.dispatchEvent(new CustomEvent("mouse.move", {
+                detail: { button: e.button, mouse: this.mouse.clone() }
+            }));
+        };
+        canvas.onmouseup = e => {
+            this.mouse.x = e.offsetX; this.mouse.y = e.offsetY;
+            this.ctx.canvas.classList.remove("dragging");
+            canvas.dispatchEvent(new CustomEvent("mouse.up", {
+                detail: { button: e.button, mouse: this.mouse.clone() }
+            }));
+        };
     }
     getCanvas() {
         var canvas = null;
@@ -22,7 +46,6 @@ class Canvas {
         this.ctx.restore();
     }
     hud(x, y, d) {
-
         this.ctx.fillStyle = "rgb(100, 100, 100)";
         this.ctx.fillRect(0, this.h - (8 * 3), this.w, this.h);
 
