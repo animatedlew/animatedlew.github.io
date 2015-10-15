@@ -6,11 +6,22 @@ class Vector {
         let x = b.x - a.x, y = b.y - a.y;
         return Math.sqrt(x * x + y * y);
     }
+    static random2D() {
+        return new Vector(Math.random() - 0.49, Math.random() - 0.49);
+    }
+    reverse() { this.x = -this.x; this.y = -this.y; return this; }
+    zero() { this.x = 0; this.y = 0; return this; }
     clone()     { return new Vector(this.x, this.y); }
     get mag()   { return Math.sqrt(this.magSq); }
     get magSq() { return this.x * this.x + this.y * this.y; }
     setMag(mag) { this.normalize().scale(mag); return this; }
-    normalize() { var m = this.mag; this.x /= m; this.y /= m; return this; }
+    limit(mag) { if (mag < this.mag) this.setMag(mag); return this; }
+    normalize() {
+        var m = this.mag;
+        if (m) { this.x /= m; this.y /= m; }
+        else { this.x = 1; this.y = 0; }
+        return this;
+    }
     scale(f)    { this.x *= f; this.y *= f; return this; }
     add(v)      { this.x += v.x; this.y += v.y; return this; }
     sub(v)      { this.x -= v.x; this.y -= v.y; return this; }
