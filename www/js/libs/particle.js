@@ -54,15 +54,22 @@ class Particle {
     get friction() {
         return this.velocity.clone().reverse().normalize().scale(0.3);
     }
-    update() {
+    get random() {
+        return Vector.random2D().scale(20);
+    }
+    update(options = { random: false, gravity: true, limit: 10, edgeStrategy: "bounce" }) {
+
         if (!this.circle.isDragging) {
             this.applyForce(this.friction);
-            this.applyForce(this.gravity);
 
-            this.velocity.add(this.acceleration);
+            if (options.random) this.applyForce(this.random);
+            if (options.gravity) this.applyForce(this.gravity);
+
+            this.velocity.add(this.acceleration).limit(options.limit);
             this.position.add(this.velocity);
 
-            this.bounce();
+            if (options.edgeStrategy) this[options.edgeStrategy]();
+            else this.bounce();
         }
         this.acceleration.zero();
     }

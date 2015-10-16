@@ -2,12 +2,12 @@
 ///////////////////////////////////////////////////////////////////////////////
 var init = () => {
 
-    let canvas = new Canvas("gravityParticles", 530, 250),
+    let canvas = new Canvas("bouncingParticles", 530, 250),
         step = () => { requestAnimationFrame(step); draw(); };
 
     requestAnimationFrame(step);
 
-    const MAX_PARTICLES = 10;
+    const MAX_PARTICLES = 24;
 
     let particles = new Array(MAX_PARTICLES)
         .join("!")
@@ -21,7 +21,12 @@ var init = () => {
 
     let draw = () => {
         canvas.clear();
-        particles.forEach(p => p.update());
+        particles.forEach(p => p.update({
+          edgeStrategy: "bounce",
+          gravity: false,
+          random: true,
+          limit: 4
+        }));
         particles.forEach((p0, i) => {
             while (++i < MAX_PARTICLES) {
                 var p1 = particles[i]; // grab the tail
