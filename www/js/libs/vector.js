@@ -6,8 +6,14 @@ class Vector {
         let x = b.x - a.x, y = b.y - a.y;
         return Math.sqrt(x * x + y * y);
     }
+    static periodic(a, b, t = 0.5) {
+        return b.clone().sub(a).scale(t).add(a);
+    }
+    static midpoint(a, b) {
+        return Vector.periodic(a, b);
+    }
     static random2D() {
-        return new Vector(Math.random() - 0.49, Math.random() - 0.49);
+        return new Vector(Math.random() - Math.random(), Math.random() - Math.random());
     }
     reverse() { this.x = -this.x; this.y = -this.y; return this; }
     zero() { this.x = 0; this.y = 0; return this; }

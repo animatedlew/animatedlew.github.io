@@ -1,10 +1,10 @@
 class Particle {
     constructor(options) {
 
-        this.r = 4;
+        this.r = options.r || 4;
         this.padding = 2;
         this.ctx = options.ctx;
-        this.circle = new Circle(this.ctx, 0, 0, this.r, "white");
+        this.circle = new Circle(this.ctx, 0, 0, this.r, "white", options.isDraggable || true);
 
         this.position = options.position || new Vector(0, 0);
         this.velocity = options.velocity || new Vector(0, 0);
