@@ -19,6 +19,12 @@ var init = () => {
 
     let connection = new Line(canvas.ctx, 300);
 
+    let intervalId = setInterval(() => {
+        particles.forEach(p => p.position = new Vector(Utils.rand(30, 500), Utils.rand(20, 180)));
+    }, 2500);
+
+    setTimeout(() => clearInterval(intervalId), 10000);
+
     let draw = () => {
         canvas.clear();
         particles.forEach(p => p.update());
