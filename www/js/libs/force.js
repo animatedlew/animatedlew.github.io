@@ -1,7 +1,7 @@
 const G = 1;
 
 class Force {
-    static attract(a, b) {
+    static gravitate(a, b) {
         let force = a.position.clone().sub(b.position);
         let m = (G * a.mass * b.mass) / force.magSq;
         force.setMag(m).limit(0.5);

@@ -4,7 +4,7 @@ var init = () => {
 
     const SCREEN_WIDTH = 530, SCREEN_HEIGHT = 250;
 
-    let canvas = new Canvas("attractedParticles", SCREEN_WIDTH, SCREEN_HEIGHT),
+    let canvas = new Canvas("gravitate", SCREEN_WIDTH, SCREEN_HEIGHT),
         step = () => { requestAnimationFrame(step); draw(); };
 
     requestAnimationFrame(step);
@@ -28,7 +28,7 @@ var init = () => {
     let draw = () => {
         canvas.clear();
 
-        Force.attract(particles[0], particles[1]);
+        Force.gravitate(particles[0], particles[1]);
 
         particles.forEach((p, i) => {
             p.update({
