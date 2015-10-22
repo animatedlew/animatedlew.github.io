@@ -18,6 +18,8 @@ class Vector {
     reverse() { this.x = -this.x; this.y = -this.y; return this; }
     zero() { this.x = 0; this.y = 0; return this; }
     clone()     { return new Vector(this.x, this.y); }
+    get rn()    { return new Vector(this.y, -this.x); }
+    get ln()    { return new Vector(-this.y, this.x); }
     get mag()   { return Math.sqrt(this.magSq); }
     get magSq() { return this.x * this.x + this.y * this.y; }
     setMag(mag) { this.normalize().scale(mag); return this; }
