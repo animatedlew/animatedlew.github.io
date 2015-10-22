@@ -27,7 +27,10 @@ var init = () => {
 
     let draw = () => {
         canvas.clear();
-        particles.forEach(p => p.update());
+        particles.forEach(p => p.update({
+            friction: true,
+            gravity: true
+        }));
         particles.forEach((p0, i) => {
             while (++i < MAX_PARTICLES) {
                 var p1 = particles[i]; // grab the tail

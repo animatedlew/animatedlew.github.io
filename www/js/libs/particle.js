@@ -11,7 +11,7 @@ class Particle {
         this.acceleration = options.acceleration || new Vector(0, 0);
         this.MAX_VELOCITY = 4;
 
-        this.mass = Math.random() * 10 + 5;
+        this.mass = options.mass || Math.random() * 10 + 5;
         this.gravity = new Vector(0, this.mass);
     }
     wrap() {
@@ -49,7 +49,7 @@ class Particle {
         }
     }
     applyForce(v) {
-        this.acceleration.add(v.clone().scale(1/this.mass));
+        return this.acceleration.add(v.clone().scale(1/this.mass));
     }
     get friction() {
         return this.velocity.clone().reverse().normalize().scale(0.3);
@@ -57,15 +57,17 @@ class Particle {
     get random() {
         return Vector.random2D().scale(20);
     }
-    update(options = { random: false, gravity: true, limit: 10, edgeStrategy: "bounce" }) {
+    update(options = { random: false, friction: false, gravity: false, limit: 10, edgeStrategy: "bounce" }) {
 
         if (!this.circle.isDragging) {
-            this.applyForce(this.friction);
+            if (options.friction) this.applyForce(this.friction);
 
             if (options.random) this.applyForce(this.random);
             if (options.gravity) this.applyForce(this.gravity);
 
-            this.velocity.add(this.acceleration).limit(options.limit);
+            this.velocity.add(this.acceleration);
+            if (options.limit) this.velocity.limit(options.limit);
+            
             this.position.add(this.velocity);
 
             if (options.edgeStrategy) this[options.edgeStrategy]();
