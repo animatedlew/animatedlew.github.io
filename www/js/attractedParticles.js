@@ -2,7 +2,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 var init = () => {
 
-    const SCREEN_WIDTH = 530, SCREEN_HEIGHT = 250, G = 1;
+    const SCREEN_WIDTH = 530, SCREEN_HEIGHT = 250;
 
     let canvas = new Canvas("attractedParticles", SCREEN_WIDTH, SCREEN_HEIGHT),
         step = () => { requestAnimationFrame(step); draw(); };
@@ -25,18 +25,10 @@ var init = () => {
             })
         ];
 
-    let attract = (a, b) => {
-        let force = a.position.clone().sub(b.position);
-        let m = (G * a.mass * b.mass) / force.magSq;
-        force.setMag(m).limit(0.5);
-        a.applyForce(force.clone().reverse());
-        b.applyForce(force.clone());
-    };
-
     let draw = () => {
         canvas.clear();
 
-        attract(particles[0], particles[1]);
+        Force.attract(particles[0], particles[1]);
 
         particles.forEach((p, i) => {
             p.update({
