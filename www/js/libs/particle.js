@@ -12,7 +12,7 @@ class Particle {
         this.MAX_VELOCITY = 4;
 
         this.mass = options.mass || Math.random() * 10 + 5;
-        this.gravity = new Vector(0, this.mass);
+        this.gravity = Force.gravity(this);
     }
     wrap() {
         if (this.position.x < -this.r)
@@ -60,14 +60,14 @@ class Particle {
     update(options = { random: false, friction: false, gravity: false, limit: 10, edgeStrategy: "bounce" }) {
 
         if (!this.circle.isDragging) {
-            if (options.friction) this.applyForce(this.friction);
 
+            if (options.friction) this.applyForce(this.friction);
             if (options.random) this.applyForce(this.random);
             if (options.gravity) this.applyForce(this.gravity);
 
             this.velocity.add(this.acceleration);
             if (options.limit) this.velocity.limit(options.limit);
-            
+
             this.position.add(this.velocity);
 
             if (options.edgeStrategy) this[options.edgeStrategy]();
