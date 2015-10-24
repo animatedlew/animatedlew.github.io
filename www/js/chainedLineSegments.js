@@ -75,7 +75,7 @@ var init = () => {
     let t = 0,
         tVel = 0.01;
 
-    let connection = new Line(canvas.ctx, 1000);
+    let connection = new Line(canvas.ctx, 1000, { lineWidth: 4 });
 
     let draw = () => {
         canvas.clear();

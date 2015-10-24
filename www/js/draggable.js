@@ -85,10 +85,10 @@ class Circle extends Draggable {
     render() {
         this.ctx.beginPath();
         this.ctx.arc(this.x, this.y, this.r + (this.isDragging ? 2 : 0), 0, 2 * Math.PI);
-        this.ctx.fillStyle = "steelblue";
+        this.ctx.fillStyle = "white";
         this.ctx.lineWidth = 2;
-        this.ctx.stroke();
         this.ctx.fill();
+        this.ctx.stroke();
     }
 }
 

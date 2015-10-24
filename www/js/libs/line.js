@@ -1,13 +1,14 @@
 
 class Line {
-    constructor(ctx, weakeningDistance) {
+    constructor(ctx, weakeningDistance, options = { lineWidth: 2 }) {
         this.weakeningDistance = weakeningDistance;
         this.ctx = ctx;
+        this.lineWidth = options.lineWidth;
     }
     draw(x1, y1, x2, y2, c) {
         this.ctx.save();
         this.ctx.strokeStyle = c || "steelblue";
-        this.ctx.strokeWidth = 2;
+        this.ctx.lineWidth = this.lineWidth;
         this.ctx.beginPath();
         this.ctx.moveTo(x1, y1);
         this.ctx.lineTo(x2, y2);

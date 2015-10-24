@@ -47,8 +47,8 @@ function circle(ctx, x, y, r) {
     ctx.arc(x, y, r, 0, 2 * Math.PI);
     ctx.fillStyle = "white";
     ctx.lineWidth = 2;
-    ctx.stroke();
     ctx.fill();
+    ctx.stroke();
 }
 
 function draw(ctx) {
@@ -67,9 +67,9 @@ function draw(ctx) {
 
     line(ctx, m.x, m.y, c.x, c.y);
 
-    circle(ctx, o.x, o.y, 4);
-    circle(ctx, m.x, m.y, 4);
-    circle(ctx, c.x, c.y, 2);
+    circle(ctx, o.x, o.y, 8);
+    circle(ctx, c.x, c.y, 4);
+    circle(ctx, m.x, m.y, 8);
 
     hud(ctx, m.x, m.y);
 }
@@ -83,8 +83,8 @@ var init = function() {
         s.my = e.offsetY;
     };
 
-    window.requestAnimationFrame(function step() {
-        window.requestAnimationFrame(step);
+    requestAnimationFrame(function step() {
+        requestAnimationFrame(step);
         draw(ctx);
     });
 

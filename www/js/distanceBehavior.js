@@ -42,8 +42,8 @@ function circle(ctx, x, y, r) {
     ctx.arc(x, y, r, 0, 2 * Math.PI);
     ctx.fillStyle = "white";
     ctx.lineWidth = 2;
-    ctx.stroke();
     ctx.fill();
+    ctx.stroke();
 }
 
 function draw(ctx) {

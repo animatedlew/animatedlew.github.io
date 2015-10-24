@@ -33,7 +33,7 @@ class Vector {
     scale(f)    { this.x *= f; this.y *= f; return this; }
     add(v)      { this.x += v.x; this.y += v.y; return this; }
     sub(v)      { this.x -= v.x; this.y -= v.y; return this; }
-    toString()  { return `<${this.x}, ${this.y}>`; }
+    toString()  { return `<${this.x.toFixed(2)}, ${this.y.toFixed(2)}>`; }
 }
 
 // export class globally

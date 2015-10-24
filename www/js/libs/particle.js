@@ -4,7 +4,7 @@ class Particle {
         this.r = options.r || 4;
         this.padding = 2;
         this.ctx = options.ctx;
-        this.circle = new Circle(this.ctx, 0, 0, this.r, "white", options.isDraggable || true);
+        this.circle = new Circle(this.ctx, 0, 0, this.r, options.color || "white", options.isDraggable || true);
 
         this.position = options.position || new Vector(0, 0);
         this.velocity = options.velocity || new Vector(0, 0);
