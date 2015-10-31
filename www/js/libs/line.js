@@ -9,6 +9,7 @@ class Line {
         this.ctx.save();
         this.ctx.strokeStyle = c || "steelblue";
         this.ctx.lineWidth = this.lineWidth;
+        this.ctx.lineCap = "round";
         this.ctx.beginPath();
         this.ctx.moveTo(x1, y1);
         this.ctx.lineTo(x2, y2);

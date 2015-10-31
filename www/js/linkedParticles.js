@@ -9,7 +9,7 @@ var init = () => {
 
     const MAX_PARTICLES = 16;
     const MAX_CONNECTIONS = Utils.collisionComplexity(MAX_PARTICLES);
-    console.log(`MAX CONNECTIONS: ${MAX_CONNECTIONS}`);
+    //console.log(`MAX CONNECTIONS: ${MAX_CONNECTIONS}`);
 
     let particles = new Array(MAX_PARTICLES)
         .join("!")
