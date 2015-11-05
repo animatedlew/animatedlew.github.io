@@ -1,4 +1,4 @@
-class Verlet {
+class VerletParticle {
     constructor(options) {
         this.p = {};
 
@@ -73,7 +73,14 @@ class Verlet {
     cachePos() { this._p = { x: this.x, y: this.y }; }
     setCachedPos() { this.p = this._p; }
 
-    update(options = { random: false, friction: false, gravity: false, limit: 10, edgeStrategy: "bounce" }) {
+    update(options = {
+        random: false,
+        friction: false,
+        gravity: false,
+        respawn: null,
+        limit: 10,
+        edgeStrategy: "bounce"
+    }) {
         if (!this.dead) {
             if (options.gravity) this.applyForce(this.gravity);
             this.vx += this.acceleration.x;
@@ -86,14 +93,14 @@ class Verlet {
             else this.die();
             this.acceleration.zero();
         } else {
-            this.setX(this.ctx.canvas.width/2);
-            this.setY(this.ctx.canvas.height/2);
-            this.vx = (Math.random() * 8 - 4) * 2;
-            this.vy = (Math.random() * 8 - 4) * 2;
-            this.circle.r = this.r = Math.random() * 8 + 1;
-            let grey = (Math.random() * 200 + 55) | 0;
-            this.circle.c = "rgba("+[grey, grey, grey, Math.min(1, Math.random() + 0.1)]+")" ;
-            this.dead = false;
+            if (options.respawn) {
+                this.setX(options.respawn.x);
+                this.setY(options.respawn.y);
+                this.vx = options.respawn.vx;
+                this.vy = options.respawn.vy;
+                this.dead = false;
+            }
+            // possibly remove particle from array, based on a setting
         }
     }
     render() {
@@ -105,4 +112,4 @@ class Verlet {
     }
 }
 
-window.VerletParticle = Verlet;
+window.VerletParticle = VerletParticle;
