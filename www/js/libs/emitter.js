@@ -6,12 +6,12 @@ class Emitter {
         this.position = options.position ||
             new Vector(this.ctx.canvas.width/2, this.ctx.canvas.height/2);
         this.velocity = options.velocity || new Vector(0, 0);
-        this.massRange = [1, 10];
+        this.massRange = [4, 8];
         this.gravity = options.gravity || false;
         this.particles = [];
         this.stream = options.stream || false;
         this.streamCounter = 0;
-        this.streamThreshold = 6;
+        this.streamThreshold = 3;
 
         for (var i = 0; i < this.total; i++) {
 
@@ -20,10 +20,7 @@ class Emitter {
 
             this.particles.push(new VerletParticle({
                     ctx: this.ctx,
-                    x: this.position.x,
-                    y: this.position.y,
-                    vx: this.velocity.x,
-                    vy: this.velocity.y,
+                    x: -m * 2, y: -m,
                     mass: m,
                     color: "rgba("+[grey, grey, grey, Math.min(1, Math.random() + 0.1)]+")",
                     r: m,
@@ -38,17 +35,18 @@ class Emitter {
                 if (particle.dead) {
                     particle.setX(this.position.x);
                     particle.setY(this.position.y);
-                    particle.vx = this.velocity.x;
-                    particle.vy = this.velocity.y;
+                    particle.vx = this.velocity.x + Math.random() * 6 - 3;
+                    particle.vy = this.velocity.y + Math.random() * 8 - 4;
                     particle.dead = false;
                     return;
                 }
             }
         }
     }
-    update() {
+    update(callback) {
         if (this.stream) this.wakeParticle();
         this.particles.forEach(p => {
+            if (typeof callback === "function") callback(p);
             p.update({
                 gravity: this.gravity,
                 edgeStrategy: "die"
