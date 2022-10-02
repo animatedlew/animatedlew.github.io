@@ -1,4 +1,4 @@
-class Vector {
+export default class Vector {
     constructor    (x, y) { this.x = x; this.y = y; }
     static dot     (a, b) { return a.x * b.x + a.y * b.y; }
     static angle   (a, b) { return Math.acos(a.dot(b)); }
@@ -35,6 +35,3 @@ class Vector {
     sub(v)      { this.x -= v.x; this.y -= v.y; return this; }
     toString()  { return `<${this.x.toFixed(2)}, ${this.y.toFixed(2)}>`; }
 }
-
-// export class globally
-window.Vector = Vector;

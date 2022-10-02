@@ -1,11 +1,14 @@
-class Draggable {
+import Vector from './vector.js';
+
+export default class Draggable {
     constructor(ctx, x, y, r, isDraggable) {
         this.ctx = ctx;
         this.r = r;
         this.position = new Vector(x, y);
-        if (isDraggable) this.setupMouseEvents(ctx.canvas);
+        if (isDraggable) this.setupMouseEvents(ctx?.canvas);
     }
     setupMouseEvents(canvas) {
+        if (canvas) {
         this.isDragging = false;
         canvas.addEventListener("mouse.down", e => {
             var dist = Vector.distance(this.position, e.detail.mouse);
@@ -21,7 +24,6 @@ class Draggable {
             this.isDragging = false;
             this.ctx.canvas.classList.remove("dragging");
         }, false);
+        }
     }
 }
-
-window.Draggable = Draggable;

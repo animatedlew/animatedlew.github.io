@@ -1,6 +1,4 @@
-
-
-var svg = d3.select("#linearScale").attr({ width: 530, height: 250 });
+let svg = d3.select("#linearScale").attr({ width: 530, height: 250 });
 
 function line(x1, y1, x2, y2) {
   svg.append("line").attr({

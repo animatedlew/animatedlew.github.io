@@ -1,6 +1,9 @@
+import Vector from "./vector.js";
+import Utils from "./utils.js";
+
 const G = 0.1; // Gravitational constant
 
-class Force {
+export default class Force {
     static gravity(v) {
         return new Vector(0, v.mass); // ~9.8 m/s
     }
@@ -18,5 +21,3 @@ class Force {
         b.applyForce(force.clone());
     }
 }
-
-window.Force = Force;

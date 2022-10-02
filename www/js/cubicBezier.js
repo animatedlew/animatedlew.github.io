@@ -1,3 +1,7 @@
+import Particle from './libs/particle.js';
+import Vector from './libs/vector.js';
+import Canvas from './libs/canvas.js';
+import Line from './libs/line.js';
 
 let rid = 0;
 let stopAnimation = () => {
@@ -10,8 +14,9 @@ let stopAnimation = () => {
 ///////////////////////////////////////////////////////////////////////////////
 var init = () => {
 
-    let canvas = new Canvas("cubicBezier", 530, 250),
-        step = () => { rid = requestAnimationFrame(step); draw(); };
+    let draw = () => {};
+    let canvas = new Canvas("cubicBezier", 530, 250);
+    let step = () => { rid = requestAnimationFrame(step); draw() };
 
     requestAnimationFrame(step);
 
@@ -80,7 +85,7 @@ var init = () => {
     let connections = [[0, 1], [1, 2], [2, 3]];
     let connection = new Line(canvas.ctx, 1000, { lineWidth: 4 });
 
-    let draw = () => {
+    draw = () => {
         canvas.clear();
 
         p.forEach(p => p.update({

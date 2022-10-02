@@ -1,4 +1,8 @@
-class VerletParticle {
+import Circle from "./circle.js";
+import Vector from "./vector.js";
+import Force from "./force.js";
+
+export default class VerletParticle {
     constructor(options) {
         this.p = {};
 
@@ -111,5 +115,3 @@ class VerletParticle {
         }
     }
 }
-
-window.VerletParticle = VerletParticle;

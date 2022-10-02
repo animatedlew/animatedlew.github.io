@@ -1,5 +1,6 @@
+import Vector from './libs/vector.js';
 
-var s = {
+let s = {
     w: 530,
     h: 250,
     mx: 530/2,

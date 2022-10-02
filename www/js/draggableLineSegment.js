@@ -1,9 +1,13 @@
+import Canvas from './libs/canvas.js';
+import Particle from './libs/particle.js';
+import Line from './libs/line.js';
+import Vector from './libs/vector.js';
+import Utils from './libs/utils.js';
 
-///////////////////////////////////////////////////////////////////////////////
-var init = () => {
+const init = () => {
 
     let canvas = new Canvas("draggableLineSegment", 530, 250),
-        step = () => { requestAnimationFrame(step); draw(); };
+        step = () => { requestAnimationFrame(step); draw() };
 
     requestAnimationFrame(step);
 
@@ -30,7 +34,7 @@ var init = () => {
     let p = 0,
         pvel = 0.01;
 
-    let draw = () => {
+    var draw = () => {
         canvas.clear();
 
         particles.forEach(p => p.update({

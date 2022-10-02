@@ -1,6 +1,9 @@
+import Particle from './libs/particle.js';
+import Canvas from './libs/canvas.js';
+import Vector from './libs/vector.js';
+import Line from './libs/line.js';
 
-///////////////////////////////////////////////////////////////////////////////
-var init = () => {
+const init = () => {
 
     let canvas = new Canvas("chainedLineSegments", 530, 250),
         step = () => { requestAnimationFrame(step); draw(); };

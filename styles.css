@@ -1,0 +1,73 @@
+.no-select {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.draggable.dragging {
+    cursor: -webkit-grabbing;
+}
+
+.draggable {
+    cursor: -webkit-grab;
+}
+
+html {
+    margin: 0;
+}
+
+body {
+    margin: 40px;
+    position: relative;
+}
+
+.caption {
+    margin-left: 20px;
+    font-weight: bold;
+}
+
+.chart {
+    display: inline-block;
+    outline: 1px solid #ddd;
+    margin: 4px 2px;
+}
+
+.line {
+    fill: none;
+    stroke: steelblue;
+    stroke-width: 1.5px;
+}
+
+.line.red {
+    stroke: red;
+}
+
+.line.green {
+    stroke: green;
+}
+
+.line.gray {
+    stroke: rgba(0, 0, 0, 0.1);
+}
+
+.line.dark.blue {
+    stroke: darkblue;
+}
+
+.line.dark.red {
+    stroke: darkred;
+}
+
+.axis text {
+    font: oblique 12px Georgia, serif;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
