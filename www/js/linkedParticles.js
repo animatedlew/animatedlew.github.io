@@ -1,9 +1,12 @@
+import Utils from './libs/utils.js';
+import Canvas from './libs/canvas.js';
+import Circle from './libs/circle.js';
+import Line from './libs/line.js';
 
-///////////////////////////////////////////////////////////////////////////////
-var init = () => {
+const init = () => {
 
     let canvas = new Canvas("linkedParticles", 530, 250),
-        step = () => { requestAnimationFrame(step); draw(); };
+        step = () => { requestAnimationFrame(step); draw() };
 
     requestAnimationFrame(step);
 

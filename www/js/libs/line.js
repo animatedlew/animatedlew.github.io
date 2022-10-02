@@ -1,20 +1,24 @@
 
-class Line {
+import Vector from './vector.js';
+
+export default class Line {
     constructor(ctx, weakeningDistance, options = { lineWidth: 2 }) {
         this.weakeningDistance = weakeningDistance;
         this.ctx = ctx;
         this.lineWidth = options.lineWidth;
     }
     draw(x1, y1, x2, y2, c) {
-        this.ctx.save();
-        this.ctx.strokeStyle = c || "steelblue";
-        this.ctx.lineWidth = this.lineWidth;
-        this.ctx.lineCap = "round";
-        this.ctx.beginPath();
-        this.ctx.moveTo(x1, y1);
-        this.ctx.lineTo(x2, y2);
-        this.ctx.stroke();
-        this.ctx.restore();
+        if (this.ctx) {
+            this.ctx.save();
+            this.ctx.strokeStyle = c || "steelblue";
+            this.ctx.lineWidth = this.lineWidth;
+            this.ctx.lineCap = "round";
+            this.ctx.beginPath();
+            this.ctx.moveTo(x1, y1);
+            this.ctx.lineTo(x2, y2);
+            this.ctx.stroke();
+            this.ctx.restore();
+        }
     }
     render(x1, y1, x2, y2, color) {
         const a = new Vector(x1, y1);
@@ -26,5 +30,3 @@ class Line {
         this.draw(a.x, a.y, b.x, b.y, color || `rgba(0, 0, 0, ${opacity})`);
     }
 }
-
-window.Line = Line;

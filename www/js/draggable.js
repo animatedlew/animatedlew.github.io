@@ -1,3 +1,45 @@
+class Draggable {
+    constructor(ctx, x, y, r) {
+        this.ctx = ctx;
+        this.x = x;
+        this.y = y;
+        this.r = r;
+        this.isDragging = false;
+        this.setupMouseEvents(ctx.canvas);
+    }
+    setupMouseEvents(canvas) {
+        canvas.onmousemove = e => {
+            if (this.isDragging) {
+                this.x = e.offsetX;
+                this.y = e.offsetY;
+            }
+        };
+        canvas.onmousedown = e => {
+            var dist = distance([this.x, this.y], [e.offsetX, e.offsetY]);
+            if (dist < this.r) {
+                this.isDragging = e.button === 0;
+                this.ctx.canvas.classList.add("dragging");
+            }
+        };
+        canvas.onmouseup = e => {
+            this.isDragging = false;
+            this.ctx.canvas.classList.remove("dragging");
+        };
+    }
+}
+
+class Circle extends Draggable {
+    constructor(ctx, x, y, r) { super(ctx, x, y, r); }
+    render() {
+        this.ctx.beginPath();
+        this.ctx.arc(this.x, this.y, this.r + (this.isDragging ? 2 : 0), 0, 2 * Math.PI);
+        this.ctx.fillStyle = "white";
+        this.ctx.lineWidth = 2;
+        this.ctx.fill();
+        this.ctx.stroke();
+    }
+}
+
 class Canvas {
     constructor(selector, w, h) {
         this.selector = selector;
@@ -50,49 +92,7 @@ function distance(posA, posB) {
     return Math.sqrt(x * x + y * y);
 }
 
-class Draggable {
-    constructor(ctx, x, y, r) {
-        this.ctx = ctx;
-        this.x = x;
-        this.y = y;
-        this.r = r;
-        this.isDragging = false;
-        this.setupMouseEvents(ctx.canvas);
-    }
-    setupMouseEvents(canvas) {
-        canvas.onmousemove = e => {
-            if (this.isDragging) {
-                this.x = e.offsetX;
-                this.y = e.offsetY;
-            }
-        };
-        canvas.onmousedown = e => {
-            var dist = distance([this.x, this.y], [e.offsetX, e.offsetY]);
-            if (dist < this.r) {
-                this.isDragging = e.button === 0;
-                this.ctx.canvas.classList.add("dragging");
-            }
-        };
-        canvas.onmouseup = e => {
-            this.isDragging = false;
-            this.ctx.canvas.classList.remove("dragging");
-        };
-    }
-}
-
-class Circle extends Draggable {
-    constructor(ctx, x, y, r) { super(ctx, x, y, r); }
-    render() {
-        this.ctx.beginPath();
-        this.ctx.arc(this.x, this.y, this.r + (this.isDragging ? 2 : 0), 0, 2 * Math.PI);
-        this.ctx.fillStyle = "white";
-        this.ctx.lineWidth = 2;
-        this.ctx.fill();
-        this.ctx.stroke();
-    }
-}
-
-var init = () => {
+const init = () => {
     let canvas = new Canvas("draggable", 530, 250),
         step = () => {
             requestAnimationFrame(step);

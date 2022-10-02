@@ -1,4 +1,4 @@
-class Curve {
+export default class Curve {
     constructor(options) {
         let o = { x: 0, y: 0 };
         this.ctx = options.ctx;
@@ -47,5 +47,3 @@ class Curve {
         this.ctx.restore();
     }
 }
-
-window.Curve = Curve;

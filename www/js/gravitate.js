@@ -1,11 +1,15 @@
+import Canvas from './libs/canvas.js';
+import Vector from './libs/vector.js';
+import Particle from './libs/particle.js';
+import Force from './libs/force.js';
 
-///////////////////////////////////////////////////////////////////////////////
 var init = () => {
 
     const SCREEN_WIDTH = 530, SCREEN_HEIGHT = 250;
 
-    let canvas = new Canvas("gravitate", SCREEN_WIDTH, SCREEN_HEIGHT),
-        step = () => { requestAnimationFrame(step); draw(); };
+    let draw = () => {};
+    let canvas = new Canvas("gravitate", SCREEN_WIDTH, SCREEN_HEIGHT);
+    let step = () => { requestAnimationFrame(step); draw() };
 
     requestAnimationFrame(step);
 
@@ -25,7 +29,7 @@ var init = () => {
             })
         ];
 
-    let draw = () => {
+    draw = () => {
         canvas.clear();
 
         Force.gravitate(particles[0], particles[1]);

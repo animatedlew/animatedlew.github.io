@@ -4,19 +4,15 @@
   "description": "A physics playground",
   "main": "index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "python3 -m http.server"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/animatedlew/animatedlew.github.io.git"
   },
   "author": "Lewis Moronta",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/animatedlew/animatedlew.github.io/issues"
-  },
-  "homepage": "https://github.com/animatedlew/animatedlew.github.io#readme",
-  "dependencies": {
-    "babel-core": "^5.8.25"
   }
 }

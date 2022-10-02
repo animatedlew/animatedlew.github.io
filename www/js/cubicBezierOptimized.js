@@ -1,3 +1,8 @@
+import Line from './libs/line.js';
+import Vector from './libs/vector.js';
+import Canvas from './libs/canvas.js';
+import Particle from './libs/particle.js';
+import Curve from './libs/curve.js';
 
 let rid = 0;
 let stopAnimation = () => {
@@ -7,11 +12,11 @@ let stopAnimation = () => {
     }
 };
 
-///////////////////////////////////////////////////////////////////////////////
-var init = () => {
+const init = () => {
 
-    let canvas = new Canvas("cubicBezierOptimized", 530, 250),
-        step = () => { rid = requestAnimationFrame(step); draw(); };
+    let draw = () => {};
+    let canvas = new Canvas("cubicBezierOptimized", 530, 250);
+    let step = () => { rid = requestAnimationFrame(step); draw() };
 
     requestAnimationFrame(step);
 
@@ -45,7 +50,7 @@ var init = () => {
         ctx: canvas.ctx
     });
 
-    let draw = () => {
+    draw = () => {
         canvas.clear();
 
         p.forEach(p => p.update({

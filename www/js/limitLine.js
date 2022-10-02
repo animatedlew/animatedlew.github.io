@@ -1,5 +1,6 @@
+import Vector from './libs/vector.js';
 
-var s = {
+let s = {
     w: 530,
     h: 250,
     mx: 530/2,
@@ -7,7 +8,7 @@ var s = {
 };
 
 function setupCanvas(w, h) {
-    var canvas = document.getElementById("limitLine");
+    let canvas = document.getElementById("limitLine");
     canvas.setAttribute("width", w);
     canvas.setAttribute("height", h);
     return canvas.getContext("2d");
@@ -76,7 +77,7 @@ function draw(ctx) {
 
 var init = function() {
 
-    var ctx = setupCanvas(s.w, s.h);
+    let ctx = setupCanvas(s.w, s.h);
 
     ctx.canvas.onmousemove = e => {
         s.mx = e.offsetX;

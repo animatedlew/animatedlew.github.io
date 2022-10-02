@@ -1,4 +1,8 @@
-class Particle {
+import Circle from './circle.js';
+import Vector from './vector.js';
+import Force from './force.js';
+
+export default class Particle {
     constructor(options) {
 
         this.r = options.r || 4;
@@ -28,24 +32,26 @@ class Particle {
             this.position.y = -this.r;
     }
     bounce() {
-        if (this.position.x < this.r + this.padding) {
-            this.position.x = this.r + this.padding;
-            this.velocity.x *= -1;
-        }
+        if (this.ctx) {
+            if (this.position.x < this.r + this.padding) {
+                this.position.x = this.r + this.padding;
+                this.velocity.x *= -1;
+            }
 
-        if (this.position.x > this.ctx.canvas.width - this.r - this.padding) {
-            this.position.x = this.ctx.canvas.width - this.r - this.padding;
-            this.velocity.x *= -1;
-        }
-
-        if (this.position.y < this.r + this.padding) {
-            this.position.y = this.r + this.padding;
-            this.velocity.y *= -1;
-        }
-
-        if (this.position.y > this.ctx.canvas.height - this.r - this.padding) {
-            this.position.y = this.ctx.canvas.height - this.r - this.padding;
-            this.velocity.y *= -1;
+            if (this.position.x > this.ctx.canvas.width - this.r - this.padding) {
+                this.position.x = this.ctx.canvas.width - this.r - this.padding;
+                this.velocity.x *= -1;
+            }
+            
+            if (this.position.y < this.r + this.padding) {
+                this.position.y = this.r + this.padding;
+                this.velocity.y *= -1;
+            }
+            
+            if (this.position.y > this.ctx.canvas.height - this.r - this.padding) {
+                this.position.y = this.ctx.canvas.height - this.r - this.padding;
+                this.velocity.y *= -1;
+            }
         }
     }
     applyForce(v) {
@@ -81,5 +87,3 @@ class Particle {
         this.circle.render();
     }
 }
-
-window.Particle = Particle;

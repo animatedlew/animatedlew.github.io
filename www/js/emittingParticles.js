@@ -1,3 +1,7 @@
+import Canvas from './libs/canvas.js';
+import Emitter from './libs/emitter.js';
+import Vector from './libs/vector.js';
+import Liquid from './libs/liquid.js';
 
 let rid = 0;
 let stopAnimation = () => {
@@ -7,11 +11,11 @@ let stopAnimation = () => {
     }
 };
 
-///////////////////////////////////////////////////////////////////////////////
-var init = () => {
+const init = () => {
 
-    let canvas = new Canvas("emittingParticles", 530, 250),
-        step = () => {
+    let draw = () => {};
+    let canvas = new Canvas("emittingParticles", 530, 250);
+    let step = () => {
             setTimeout(() => {
                 rid = requestAnimationFrame(step);
                 draw();
@@ -37,7 +41,7 @@ var init = () => {
         p1y: canvas.h
     });
 
-    let draw = () => {
+    draw = () => {
         canvas.clear();
         emitter.update(p => {
             if (liquid.contains(p.x, p.y)) p.applyForce(liquid.drag(p));

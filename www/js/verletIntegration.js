@@ -1,3 +1,5 @@
+import VerletParticle from './libs/verletParticle.js';
+import Canvas from './libs/canvas.js';
 
 let rid = 0;
 let stopAnimation = () => {
@@ -7,11 +9,11 @@ let stopAnimation = () => {
     }
 };
 
-///////////////////////////////////////////////////////////////////////////////
-var init = () => {
+const init = () => {
 
-    let canvas = new Canvas("verletIntegration", 530, 250),
-        step = () => { rid = requestAnimationFrame(step); draw(); };
+    let draw = () => {};
+    let canvas = new Canvas("verletIntegration", 530, 250);
+    let step = () => { rid = requestAnimationFrame(step); draw() };
 
     requestAnimationFrame(step);
 
@@ -30,7 +32,7 @@ var init = () => {
             }));
     }
 
-    let draw = () => {
+    draw = () => {
         canvas.clear();
 
         particles.forEach(p =>

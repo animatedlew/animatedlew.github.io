@@ -1,4 +1,6 @@
-class Emitter {
+import VerletParticle from "./verletParticle.js";
+
+export default class Emitter {
     constructor(options) {
 
         this.ctx = options.ctx;
@@ -59,5 +61,3 @@ class Emitter {
         });
     }
 }
-
-window.Emitter = Emitter;

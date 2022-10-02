@@ -1,4 +1,6 @@
-class Liquid {
+import Vector from './vector.js';
+
+export default class Liquid {
     constructor(options) {
         this.ctx = options.ctx;
         this.p0x = options.p0x || 0;
@@ -22,5 +24,3 @@ class Liquid {
         this.ctx.restore();
     }
 }
-
-window.Liquid = Liquid;

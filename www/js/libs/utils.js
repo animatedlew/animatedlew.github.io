@@ -1,4 +1,4 @@
-class Utils {
+export default class Utils {
     static rand(s, e) { return Math.random() * e + s; }
     static collisionComplexity(n) { return (n * n - n) / 2; }
     static assert(condition, message) {
@@ -15,5 +15,3 @@ class Utils {
       return input => rangeSize * ((input - domainMin) / domainSize) + rangeMin;
     }
 }
-
-window.Utils = Utils;
